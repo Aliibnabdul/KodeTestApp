@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SearchStyle">
+        <item name="android:background">@drawable/bg_rounded_search</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColorHint">@color/textColorSecondary</item>
+        <item name="android:hint">@string/hint_search_query</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:imeOptions">actionSearch</item>
+    </style>
+
+    <style name="TabLayoutStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ErrorTitleStyle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="ErrorSubtitleStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColorErrorSubtitle</item>
+    </style>
+
+    <style name="ErrorActionStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetMainStyle</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="enableEdgeToEdge">true</item>
+    </style>
+
+    <style name="BottomSheetHeaderStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="BottomSheetMainStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottomsheet</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+</resources>
