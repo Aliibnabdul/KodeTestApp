@@ -1,8 +1,15 @@
 package com.example.koder.domain
 
-sealed class ApplicationError {
+import com.example.koder.R
 
-    data class Generic(val cause: Throwable? = null) : ApplicationError()
+sealed class ApplicationError {
+    object Generic : ApplicationError()
     object NoInternetConnection : ApplicationError()
 
+    fun message(): Int {
+        return when (this) {
+            Generic -> R.string.genericErrorMessage
+            NoInternetConnection -> R.string.connectionErrorMessage
+        }
+    }
 }

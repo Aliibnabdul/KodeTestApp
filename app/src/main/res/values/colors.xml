@@ -10,8 +10,10 @@
 
     <color name="bg_search">#F7F7F8</color>
     <color name="textColorSecondary">#C3C3C6</color>
+    <color name="textColorSecondaryLight">#55555C</color>
     <color name="textColorPrimary">#050510</color>
-    <color name="textColorErrorSubtitle">#97979B</color>
+    <color name="textColorTetriary">#97979B</color>
     <color name="primary">#6534FF</color>
+    <color name="errorPrimary">#F44336</color>
 
 </resources>

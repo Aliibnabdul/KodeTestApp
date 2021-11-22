@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.details.DetailsFragment">
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="36dp"
+        android:contentDescription="@string/photo"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_goose" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:singleLine="true"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/tvUserTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:singleLine="true"
+        android:textColor="@color/textColorTetriary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+        app:layout_constraintStart_toEndOf="@+id/tvTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"
+        tools:text="UserTag" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:singleLine="true"
+        android:textAppearance="@style/HolderSubtitleStyle"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:text="Subitle" />
+
+    <ImageView
+        android:id="@+id/ivStar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="52dp"
+        android:contentDescription="@string/star_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
+        app:srcCompat="@drawable/ic_star" />
+
+    <TextView
+        android:id="@+id/tvBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:singleLine="true"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivStar"
+        app:layout_constraintStart_toEndOf="@+id/ivStar"
+        app:layout_constraintTop_toTopOf="@+id/ivStar"
+        tools:text="Birthday" />
+
+    <TextView
+        android:id="@+id/tvAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:singleLine="true"
+        android:textColor="@color/textColorTetriary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBirthday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvBirthday"
+        tools:text="Age" />
+
+    <ImageView
+        android:id="@+id/ivPhone"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="52dp"
+        android:contentDescription="@string/star_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivStar"
+        app:srcCompat="@drawable/ic_phone" />
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:singleLine="true"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
+        app:layout_constraintStart_toEndOf="@+id/ivPhone"
+        app:layout_constraintTop_toTopOf="@+id/ivPhone"
+        tools:text="PhoneNumber" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

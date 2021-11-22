@@ -1,8 +1,11 @@
 package com.example.koder.domain
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 
-data class EmployeeUiModel(
+@Parcelize
+data class EmployeeDomainModel(
     val id: String,
     val avatarUrl: String,
     val firstName: String,
@@ -12,5 +15,6 @@ data class EmployeeUiModel(
     val position: String,
     val birthday: String,
     val birthdayLocalDate: LocalDate,
+    val nextBirthdayLocalDate: LocalDate,
     val phone: String
-)
+): Parcelable

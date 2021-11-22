@@ -2,22 +2,25 @@ package com.example.koder.domain
 
 import com.example.koder.data.network.EmployeeDto
 import com.example.koder.extensions.toLocalDate
+import com.example.koder.extensions.toNextLocalDate
+import com.example.koder.extensions.toUiFormat
 
-fun EmployeeDto.toUiModel() = EmployeeUiModel(
+fun EmployeeDto.toEmployeeDomainModel() = EmployeeDomainModel(
     id = id,
     avatarUrl = avatarUrl,
     firstName = firstName,
     lastName = lastName,
-    userTag = userTag,
+    userTag = userTag.lowercase(),
     department = department.toUiDepartment(),
     position = position,
-    birthday = birthday,
+    birthday = birthday.toUiFormat(),
     birthdayLocalDate = birthday.toLocalDate(),
+    nextBirthdayLocalDate = birthday.toNextLocalDate(),
     phone = phone
 )
 
-private fun String.toUiDepartment(): String{
-    return when(this){
+private fun String.toUiDepartment(): String {
+    return when (this) {
         "android" -> "Android"
         "ios" -> "iOS"
         "design" -> "Дизайн"

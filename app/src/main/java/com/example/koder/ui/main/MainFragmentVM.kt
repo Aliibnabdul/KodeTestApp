@@ -5,14 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.koder.data.KoderRepository
 import com.example.koder.domain.ApiResult
 import com.example.koder.domain.ApplicationError
-import com.example.koder.domain.EmployeeUiModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
+import com.example.koder.domain.EmployeeDomainModel
+import com.example.koder.domain.UiModel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 const val ALL_KEY = "Все"
 const val ALPHABET_SORT_KEY = 0
@@ -20,22 +17,28 @@ const val BIRTHDAY_SORT_KEY = 1
 
 class MainFragmentVM(private val koderRepository: KoderRepository) : ViewModel() {
 
-    private var departmentsMap: MutableMap<String, List<EmployeeUiModel>> = mutableMapOf()
+    private var departmentsMap: MutableMap<String, List<EmployeeDomainModel>> = mutableMapOf()
 
-    private val _keys: MutableSharedFlow<List<String>> = MutableSharedFlow()
+    private val _keys: MutableSharedFlow<List<String>> = MutableSharedFlow(replay = 1)
     val keys = _keys.asSharedFlow()
 
-    private val _filteredList: MutableStateFlow<List<EmployeeUiModel>> = MutableStateFlow(listOf())
-    val filteredList = _filteredList.asStateFlow()
+    private val _filteredUiModel: MutableStateFlow<List<UiModel>> = MutableStateFlow(listOf())
+    val filteredUiModel = _filteredUiModel.asStateFlow()
 
     private val _loading = MutableStateFlow(false)
     val loading = _loading.asStateFlow()
 
+    private val _errorSnackBar = MutableSharedFlow<ApplicationError>()
+    val errorSnackBar = _errorSnackBar.asSharedFlow()
+
     private val _error = MutableSharedFlow<ApplicationError>()
-    val error = _error.asSharedFlow()
+    val fatalError = _error.asSharedFlow()
 
     private val _sortValue = MutableStateFlow(ALPHABET_SORT_KEY)
     val sortValue = _sortValue.asStateFlow()
+
+    private val _isSearchQueryNotEmpty = MutableStateFlow(false)
+    val isSearchQueryNotEmpty = _isSearchQueryNotEmpty.asStateFlow()
 
     private val selectedTab = MutableStateFlow("")
 
@@ -46,7 +49,20 @@ class MainFragmentVM(private val koderRepository: KoderRepository) : ViewModel()
         viewModelScope.launch {
             combine(searchQuery, sortValue, selectedTab) { searchQuery, sortValue, selectedTab ->
                 getFilteredAndSorted(searchQuery, sortValue, selectedTab)
-            }.collectLatest { _filteredList.value = it }
+            }.collectLatest { list ->
+
+                _filteredUiModel.value = if (sortValue.value == BIRTHDAY_SORT_KEY) {
+                    mapToUiModelWithSeparator(list)
+                } else {
+                    list.map { UiModel.EmployeeItem(it.copy(birthday = "")) }
+                }
+            }
+        }
+
+        viewModelScope.launch {
+            searchQuery.collect {
+                _isSearchQueryNotEmpty.value = it.isNotEmpty()
+            }
         }
     }
 
@@ -61,8 +77,10 @@ class MainFragmentVM(private val koderRepository: KoderRepository) : ViewModel()
                     _keys.emit(keys)
                     _loading.value = false
                 }
-                is ApiResult.Error   -> {
-                    _error.emit(apiResult.error)
+                is ApiResult.Error -> {
+                    _loading.value = false
+                    if (departmentsMap.isEmpty()) _error.emit(apiResult.error)
+                    _errorSnackBar.emit(apiResult.error)
                 }
             }
         }
@@ -84,7 +102,7 @@ class MainFragmentVM(private val koderRepository: KoderRepository) : ViewModel()
         query: String,
         sortValue: Int,
         selectedTab: String
-    ): List<EmployeeUiModel> {
+    ): List<EmployeeDomainModel> {
         var sortedList = departmentsMap[selectedTab] ?: listOf()
         if (sortedList.isNotEmpty()) {
             if (query.length > 2) {
@@ -100,10 +118,18 @@ class MainFragmentVM(private val koderRepository: KoderRepository) : ViewModel()
                     )
                 }
                 BIRTHDAY_SORT_KEY -> {
-                    sortedList = sortedList.sortedBy { it.birthdayLocalDate }
+                    sortedList = sortedList.sortedBy { it.nextBirthdayLocalDate }
                 }
             }
         }
         return sortedList
+    }
+
+    private fun mapToUiModelWithSeparator(list: List<EmployeeDomainModel>): List<UiModel> {
+        val thisYearList = list.filter { it.nextBirthdayLocalDate.year == LocalDate.now().year }
+        val nextYearList = list.filter { it.nextBirthdayLocalDate.year != LocalDate.now().year }
+        return thisYearList.map { UiModel.EmployeeItem(it) } +
+                UiModel.SeparatorItem((LocalDate.now().year + 1).toString()) +
+                nextYearList.map { UiModel.EmployeeItem(it) }
     }
 }

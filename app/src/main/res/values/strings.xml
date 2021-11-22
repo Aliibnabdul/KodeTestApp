@@ -11,4 +11,12 @@
     <string name="flying_saucer_image">Flying saucer image</string>
     <string name="close_button">Close button</string>
     <string name="filter_button">Filter button</string>
+    <string name="back_button">Back button</string>
+    <string name="photo">Photo</string>
+    <string name="star_icon">Star icon</string>
+    <string name="emptyErrorTitle"><b>Мы никого не нашли</b></string>
+    <string name="emptyErrorSubtitle">Попробуй скорректировать запрос</string>
+    <string name="loadingMessage">Секундочку, гружусь…</string>
+    <string name="genericErrorMessage">Не могу обновить данные. Что-то пошло не так.</string>
+    <string name="connectionErrorMessage">Не могу обновить данные. Проверь соединение с интернетом.</string>
 </resources>

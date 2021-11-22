@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".ui.main.MainFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -29,46 +30,47 @@
         android:layout_marginTop="16dp"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="10dp"
-        android:drawableTint="@color/textColorSecondary"
         android:importantForAutofill="no"
+        android:inputType="textNoSuggestions"
         app:layout_constraintEnd_toStartOf="@+id/buttonCancelSearch"
         app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="parent"
-        android:inputType="textNoSuggestions"
         tools:ignore="LabelFor" />
 
     <ImageView
         android:id="@+id/ivClose"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:contentDescription="@string/close_button"
         android:padding="9dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/searchInput"
-        app:layout_constraintEnd_toEndOf="@+id/searchInput"
+        app:layout_constraintEnd_toStartOf="@+id/ivSort"
         app:layout_constraintTop_toTopOf="@+id/searchInput"
         app:srcCompat="@drawable/ic_close"
-        app:tint="@color/textColorSecondary"
-        android:contentDescription="@string/close_button" />
+        app:tint="@color/textColorSecondary" />
 
     <ImageView
         android:id="@+id/ivSort"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:contentDescription="@string/filter_button"
         android:padding="9dp"
         app:layout_constraintBottom_toBottomOf="@+id/searchInput"
         app:layout_constraintEnd_toEndOf="@+id/searchInput"
         app:layout_constraintTop_toTopOf="@+id/searchInput"
         app:srcCompat="@drawable/ic_sort"
-        app:tint="@color/textColorSecondary"
-        android:contentDescription="@string/filter_button" />
+        app:tint="@color/sl_sort" />
 
     <Button
         android:id="@+id/buttonCancelSearch"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:backgroundTint="@android:color/transparent"
         android:text="@string/cancel"
+        android:textAppearance="@style/CancelButtonTextStyle"
         android:textSize="14sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/searchInput"
@@ -87,7 +89,7 @@
         app:tabMode="scrollable"
         app:tabRippleColor="?attr/colorPrimary"
         app:tabSelectedTextColor="@color/textColorPrimary"
-        app:tabTextAppearance="@style/TabLayoutStyle" />
+        app:tabTextAppearance="@style/TabLayoutTextStyle" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlRefresh"
@@ -104,13 +106,62 @@
             android:layout_height="0dp"
             android:overScrollMode="never"
             android:scrollbars="none"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-            tools:listitem="@layout/view_holder_item" />
+            tools:listitem="@layout/view_holder_item"
+            tools:visibility="visible" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutEmptyContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+        <ImageView
+            android:id="@+id/ivEmptyImage"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="80dp"
+            android:contentDescription="@string/flying_saucer_image"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_magnifying_glass" />
+
+        <TextView
+            android:id="@+id/tvEmptyTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="@string/emptyErrorTitle"
+            android:textAppearance="@style/ErrorTitleStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivEmptyImage" />
+
+        <TextView
+            android:id="@+id/tvEmptySubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:text="@string/emptyErrorSubtitle"
+            android:textAppearance="@style/ErrorSubtitleStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmptyTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

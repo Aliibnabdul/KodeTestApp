@@ -10,10 +10,33 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:imeOptions">actionSearch</item>
+        <item name="android:drawableTint">@color/sl_search_input</item>
     </style>
 
-    <style name="TabLayoutStyle">
+    <style name="TabLayoutTextStyle">
         <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HolderTitleStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HolderSubtitleStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textColorSecondaryLight</item>
+    </style>
+
+    <style name="HolderUserTagStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textColorTetriary</item>
+    </style>
+
+    <style name="HolderBirthdayStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColorSecondaryLight</item>
     </style>
 
     <style name="ErrorTitleStyle">
@@ -23,7 +46,7 @@
 
     <style name="ErrorSubtitleStyle">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textColorErrorSubtitle</item>
+        <item name="android:textColor">@color/textColorTetriary</item>
     </style>
 
     <style name="ErrorActionStyle">
@@ -52,4 +75,10 @@
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginEnd">8dp</item>
     </style>
+
+    <style name="CancelButtonTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
